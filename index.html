@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación de Producto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background-color: #eecc84;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eecc84;
+            position: relative;
+        }
+
+        .slideshow {
+            width: 80%;
+            height: 80%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .text {
+            margin-top: 10px;
+            color: #fff;
+            font-size: 1.5em;
+            text-align: center;
+            max-width: 90%;
+            font-family: 'Dancing Script', cursive;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slideshow">
+            <!-- Menú (Imagen) -->
+            <div class="slide active">
+                <img src="menu.jpg" alt="Menú del Producto">
+                <div class="text">Menú del Producto</div>
+            </div>
+
+            <!-- Imágenes -->
+            <div class="slide">
+                <img src="dona11.jpeg" alt="Imagen 1">
+                <div class="text">Dona personalizado/div>
+            </div>
+            <div class="slide">
+                <img src="dona22.jpg" alt="Imagen 2">
+                <div class="text">Dona frutal</div>
+            </div>
+            <div class="slide">
+                <img src="dona33.jpg" alt="Imagen 3">
+                <div class="text">Dona Tropical</div>
+            </div>
+            <div class="slide">
+                <img src="dona44.jpg" alt="Imagen 4">
+                <div class="text">Dona sorpresa</div>
+            </div>
+
+            <!-- Menú para repetir entre imágenes -->
+            <div class="slide">
+                <img src="menu.jpg" alt="Menú del Producto">
+                <div class="text">Menú del Producto</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const slideInterval = 7000; // Tiempo de 7 segundos para cada imagen
+        const menuInterval = 14000; // Tiempo de 14 segundos para el menú
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function startSlideshow() {
+            setInterval(() => {
+                nextSlide();
+            }, currentSlide === 0 || currentSlide === slides.length - 1 ? menuInterval : slideInterval);
+        }
+
+        startSlideshow();
+    </script>
+</body>
+</html>
